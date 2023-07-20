@@ -85,21 +85,23 @@ To test these how significantly these correlations are we can use PearsonR test:
 <br><br><br>
 
 ## Analysis 2: Distribution of Minutes in the NBA
-Out of 608 players, around 180 play between 0 - 250 minutes. That would mean around %30 of players in the NBA don't play that many minutes. This also does not even take into account players who did not even step foot in the nba.
+Out of 608 players, around 180 play between 0 - 250 minutes. That would mean around 30% of players in the NBA don't play that many minutes. This also does not even take into account players who did not even step foot in the nba.
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/f3a29a5c-d2dd-41dc-ac2f-bcadfab9737a)
+
 <br>
 I am curious to see how this will dwell against the playoffs. I would imagine the extremes get worse because the good players would play more minutes, while the bad players probably don't step foot on the court. This leads me to my hypothesis:I believe that in the playoffs star players play a lot more minutes then if they were to play in the regular season, while bench players play less minutes in the playoffs than the regular season.
 To view this visualization, I am going to calculate based on minutes played per game.
 
-<br><br>
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/a1c2c67c-6bc2-441a-9a41-2573380a2f15)
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/8aa77393-bce3-40e6-9980-dc8a91c6b48d)
 
-As I expected, when the playoffs enter, the minutes for distribution starts skewing to the 2 extremes. From this we can say a cause for this occurrence is the coach needs  his best players to play while the role players play less. 
+- As I expected, when the playoffs enter, the minutes for distribution starts skewing to the 2 extremes. From this we can say a cause for this occurrence is the coach needs  his best players to play while the role players play less. 
+
 We can also test the averages of these 2 by using a T-test
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/b9aaa004-6ccf-429d-99ab-f6c0f42af859)
 
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/c0148735-0f72-466b-8d87-b499091639cf)
+
 Average minutes per game across the NBA in the regular season is 18.9 whereas in the playoffs it's 19.4. The difference is statistically insignificant at p = 0.53.
 <br><br><br>
 
@@ -117,8 +119,7 @@ Some of the things I want to see if there was a progression is the 3 point shot,
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/9663d9ba-4367-4784-868f-db8d814740a8)
 
 - We can see a very noticeable trend in this case. We can use a Linear regression test to see how significant this data is.
-
-![image](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/3f935b65-4957-4097-80ce-229c2e2012b2)
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/3f935b65-4957-4097-80ce-229c2e2012b2)
 
 - From this linear regression stat, we can see that the p value is significantly less than 0.01 meaning there is significant evidence for strong correlation between 3 point attempts as time progresses, with an average of about 2 more 3s being attempted every year since 2013.
 
@@ -126,6 +127,7 @@ Some of the things I want to see if there was a progression is the 3 point shot,
 Some interesting stats I noticed is how points increased, assists increased, FGA increased, and turnover decreased. This led me to think that possessions might be increasing as well. Possessions is a stat that is incremented every time an opponent touches the ball. This results in a faster pace of playing because the time in a game did not increase as its been 48 minutes for 76 years. To calculate possessions you do the formula (FGA - OR) + TO + (Y * FTA), where FGA is field goal attempts, OR is offensive rebounds, TO is turnovers, Y is some number between zero and 1 (most people use 0.44) and FTA is free throw attempts. Reason why people use 0.44 is because that's how much analysts believe a free throw is statistically worth.
 
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/9d6c212e-3f99-48ad-9c6e-b08f54aca755)
+
 <br>
 We can use a linear regression to test if this is significant.
 
@@ -134,15 +136,14 @@ We can use a linear regression to test if this is significant.
 - From the linear regression test, we can say that the p value is less than 0.01 meaning there is significant evidence for correlation between possessions as the NBA progresses since 2013 with an average of 0.8 possessions increasing each year. With this we can say that the NBA pacing is currently getting faster.
 
 <h3 align="center">True Shooting Percentage</h3>
-
 I want to measure how better the players are getting at shooting. To test this, I am going to need an advanced stat which I can calculate. This stat is called the True Shooting Percentage and it measures how efficient a player is when it comes to shooting the basketball. If the true shooting percentage goes up then I can say that players are becoming better at shooting the basketball. To calculate true shooting percentage you do (PTS / ( 2*FGA + 0.44*FTA)).
 
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/aea3580e-698a-4f2b-b801-fcf136c32803)
 
+<br>
 We can use the linear regression test here as well.
 
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/493b2cd5-e635-4a45-94e5-daf8559f534b)
-
 
 From this linear regression test, we can see that the p value  is less than 0.01 meaning there is evidence for correlation for players having their true shooting percentage numbers increase as they progress with an average of 0.004 increase each year since 2013.
 
@@ -158,7 +159,7 @@ After seeing the number of possessions from the previous analysis, it led to me 
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/cf8d91fd-0021-42d9-831e-8cea45013c5d)
 
 Relinquished and acquired are the ways in which the player got placed onto the injury list according to this dataset. I am only going to care about the Season attribute because with this I am able to group by and see how many players got injured since 2013.
-To make this dataset fair, I would need to get rid of an outlier because obviously due to covid in the year 2021 I am going to see a lot more people placed on the injury list. Players with covid does not matter to my hypothesis because I believe the increase in fast pacing of the game would affect injuries. 
+To make this dataset fair, I would need to get rid of an outliers because due to covid in the year 2021 I am going to see a lot more people placed on the injury list. Players with covid does not matter to my hypothesis because I believe the increase in fast pacing of the game would affect injuries. 
 
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/f425abad-dd8b-4a3c-abf9-dd6d03196891)
 
@@ -166,6 +167,7 @@ To make this dataset fair, I would need to get rid of an outlier because obvious
 
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/16d790b1-25c9-48f7-9f5f-daa2fd06312b)
 
+<br>
 Not a very pretty plot. Lets see what a linear regression test would say.
 
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/442b25c0-4969-4cb7-a9a4-9f95ac5bdc12)
@@ -184,7 +186,7 @@ For this calculation I tried normalizing the data, but when I imputed different 
 
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/bbe5fc9a-5b1e-435d-8432-b1ff8dff950c)
 
-So when Jayson Tatum gets imputed into the model, Devin Booker, Jaylen Brown, Stephen Curry, Kevin Durant and Paul George get outputted. If you know basketball you know that this is a somewhat accurate description since these guys are all elite scorers which is who Jayson Tatum is. To really test this I wanted to see if it would work on centers as well, and not superstars so I used Domantas Sabonis who is a center, and Chris paul who is a point guard as subjects.
+So if Jayson Tatum gets inputed into the model, Devin Booker, Jaylen Brown, Stephen Curry, Kevin Durant and Paul George get outputted. If you know basketball you know that this is a somewhat accurate description since these guys are all elite scorers which is who Jayson Tatum is. To really test this I wanted to see if it would work on centers as well, and not superstars so I used 2 subjects: Domantas Sabonis who is a center, and Chris paul who is a point guard.
 
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/2381b32a-d45a-400f-934c-151d776c41cc)
 - These are all role playing centers just like Domantas Sabonis. None of these have insane superstar stats so this is a fairly accurate description.
@@ -204,7 +206,6 @@ To start, I ran a test to see what my K value should approximately be.
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/ccb1dda0-1f94-4245-81e0-5b2bf36f6d2d)
 
 It came out roughly the same with K value being around 3. So I used this value for my guards dataframe:
-
 
 <br>
 <h3>Guards</h3>
@@ -246,7 +247,7 @@ Here is interesting because what is supposed to be a neutral PLUS_MINUS as the t
 This analysis of clustering revealed that centers who struggle with rebounding and have a low field goal percentage tend to have a negative impact on the court. Effective rebounding and efficient scoring are crucial for centers to contribute positively to their team’s success.
 
 Overall these clusters had a very similar message. Shooting the ball well does not automatically correlate with success on the basketball, but shooting the ball poorly will give you bad numbers when it comes to the plus minus stat.
-
+<br><br>
 
 # Conclusion
 Throughout this project, I gained valuable insights and drew meaningful conclusions from analyzing an NBA dataset. The data exploration and statistical analyses provided a deeper understanding of player performance, changes over time and the impact of various factors on team success. From the analysis of statistical correlations between player stats, I observed interesting relationships between different variables, indicating that players who perform better in one area may not do so in the other. The examination of minutes played distribution revealed insights into the allocation of playing time, particularly in the playoffs. Analyzing the changes in the game over the past decade uncovered significant trends such as the steady increase in the three point shot which indicated a more perimeter-oriented style of play. While exploiting the relationship between possessions and injuries, the analysis did not find significant evidence to support direct correlation which suggests that an increase in possessions and pace may not inherently lead to a higher risk of injuries among NBA players. By using machine learning techniques, I used the K-Nearest Neighbors algorithm to identify similar players and group them based on their stats as well using K-Means Clustering to group certain players up to see which one had a great impact on the court. 
