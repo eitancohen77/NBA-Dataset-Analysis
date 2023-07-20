@@ -85,3 +85,64 @@ To test these how significantly these correlations are we can use PearsonR test:
 <br><br><br>
 
 ## Analysis 2: Distribution of Minutes in the NBA
+Out of 608 players, around 180 play between 0 - 250 minutes. That would mean around %30 of players in the NBA don't play that many minutes. This also does not even take into account players who did not even step foot in the nba.
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/f3a29a5c-d2dd-41dc-ac2f-bcadfab9737a)
+<br>
+I am curious to see how this will dwell against the playoffs. I would imagine the extremes get worse because the good players would play more minutes, while the bad players probably don't step foot on the court. This leads me to my hypothesis:I believe that in the playoffs star players play a lot more minutes then if they were to play in the regular season, while bench players play less minutes in the playoffs than the regular season.
+To view this visualization, I am going to calculate based on minutes played per game.
+
+<br><br>
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/a1c2c67c-6bc2-441a-9a41-2573380a2f15)
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/8aa77393-bce3-40e6-9980-dc8a91c6b48d)
+
+As I expected, when the playoffs enter, the minutes for distribution starts skewing to the 2 extremes. From this we can say a cause for this occurrence is the coach needs  his best players to play while the role players play less. 
+We can also test the averages of these 2 by using a T-test
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/b9aaa004-6ccf-429d-99ab-f6c0f42af859)
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/c0148735-0f72-466b-8d87-b499091639cf)
+Average minutes per game across the NBA in the regular season is 18.9 whereas in the playoffs it's 19.4. The difference is statistically insignificant at p = 0.53.
+<br><br><br>
+
+## Analysis 3: Game Change in the Past 9 Years
+In the basketball world, we have a saying that Stephen Curry revolutionized the game of basketball. He showed the world that if you are really good at shooting, you can attempt to shoot the basketball from 30 feet beyond the rim. This ‘revolution’ started around his first MVP season in the 2014-2015 season. I want to track  each season from the 2013-2014 all the way until the 2021-2022 season to see how much the game changed thanks to Stephen.
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/10c78531-17fb-4e15-8122-d5a9b18eb4e6)
+
+Then I want to convert this into averages
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/c739b490-27a2-4db5-9dea-2a73e71abed5)
+
+Some of the things I want to see if there was a progression is the 3 point shot, total number of possessions, and true shooting percentage. 
+
+<h3 align="center">3 Point Attempt</h3>
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/9663d9ba-4367-4784-868f-db8d814740a8)
+
+- We can see a very noticeable trend in this case. We can use a Linear regression test to see how significant this data is.
+
+![image](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/3f935b65-4957-4097-80ce-229c2e2012b2)
+
+- From this linear regression stat, we can see that the p value is significantly less than 0.01 meaning there is significant evidence for strong correlation between 3 point attempts as time progresses, with an average of about 2 more 3s being attempted every year since 2013.
+
+<h3 align="center">Possessions</h3>
+Some interesting stats I noticed is how points increased, assists increased, FGA increased, and turnover decreased. This led me to think that possessions might be increasing as well. Possessions is a stat that is incremented every time an opponent touches the ball. This results in a faster pace of playing because the time in a game did not increase as its been 48 minutes for 76 years. To calculate possessions you do the formula (FGA - OR) + TO + (Y * FTA), where FGA is field goal attempts, OR is offensive rebounds, TO is turnovers, Y is some number between zero and 1 (most people use 0.44) and FTA is free throw attempts. Reason why people use 0.44 is because that's how much analysts believe a free throw is statistically worth.
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/9d6c212e-3f99-48ad-9c6e-b08f54aca755)
+<br>
+We can use a linear regression to test if this is significant.
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/579722e0-39ae-4bd0-9452-70b15af28aee)
+
+- From the linear regression test, we can say that the p value is less than 0.01 meaning there is significant evidence for correlation between possessions as the NBA progresses since 2013 with an average of 0.8 possessions increasing each year. With this we can say that the NBA pacing is currently getting faster.
+
+<h3 align="center">True Shooting Percentage</h3>
+
+I want to measure how better the players are getting at shooting. To test this, I am going to need an advanced stat which I can calculate. This stat is called the True Shooting Percentage and it measures how efficient a player is when it comes to shooting the basketball. If the true shooting percentage goes up then I can say that players are becoming better at shooting the basketball. To calculate true shooting percentage you do (PTS / ( 2*FGA + 0.44*FTA)).
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/aea3580e-698a-4f2b-b801-fcf136c32803)
+
+We can use the linear regression test here as well.
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/493b2cd5-e635-4a45-94e5-daf8559f534b)
+
+
+From this linear regression test, we can see that the p value  is less than 0.01 meaning there is evidence for correlation for players having their true shooting percentage numbers increase as they progress with an average of 0.004 increase each year since 2013.
+
+You can argue that Curry was not the sole purpose for this change in game and that it was headed that way regardless and all Curry did was simply spark the fire. I am more interested to see the stats from a while back because from what these charts show, it started off being flat and then when Curry came in 2014, the pacing increased. I wonder if there was a large enough dataset we would maybe see something that resembles this chart:
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/e3451ef5-ab9a-40a5-9119-7c1c10a5a3bd)
+
