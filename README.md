@@ -128,6 +128,7 @@ Some interesting stats I noticed is how points increased, assists increased, FGA
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/9d6c212e-3f99-48ad-9c6e-b08f54aca755)
 <br>
 We can use a linear regression to test if this is significant.
+
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/579722e0-39ae-4bd0-9452-70b15af28aee)
 
 - From the linear regression test, we can say that the p value is less than 0.01 meaning there is significant evidence for correlation between possessions as the NBA progresses since 2013 with an average of 0.8 possessions increasing each year. With this we can say that the NBA pacing is currently getting faster.
@@ -135,14 +136,119 @@ We can use a linear regression to test if this is significant.
 <h3 align="center">True Shooting Percentage</h3>
 
 I want to measure how better the players are getting at shooting. To test this, I am going to need an advanced stat which I can calculate. This stat is called the True Shooting Percentage and it measures how efficient a player is when it comes to shooting the basketball. If the true shooting percentage goes up then I can say that players are becoming better at shooting the basketball. To calculate true shooting percentage you do (PTS / ( 2*FGA + 0.44*FTA)).
+
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/aea3580e-698a-4f2b-b801-fcf136c32803)
 
 We can use the linear regression test here as well.
+
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/493b2cd5-e635-4a45-94e5-daf8559f534b)
 
 
 From this linear regression test, we can see that the p value  is less than 0.01 meaning there is evidence for correlation for players having their true shooting percentage numbers increase as they progress with an average of 0.004 increase each year since 2013.
 
 You can argue that Curry was not the sole purpose for this change in game and that it was headed that way regardless and all Curry did was simply spark the fire. I am more interested to see the stats from a while back because from what these charts show, it started off being flat and then when Curry came in 2014, the pacing increased. I wonder if there was a large enough dataset we would maybe see something that resembles this chart:
+
 ![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/e3451ef5-ab9a-40a5-9119-7c1c10a5a3bd)
+<br><br><br>
+
+## Analysis 4: Injuries increasing due to Possessions
+
+After seeing the number of possessions from the previous analysis, it led to me hypothesizing the idea that because possessions are increasing and the game pace is getting faster if there was a correlation with this and NBA players getting more injured. To do this I would need to pull another dataset which contains players that were injured and their reasoning. Luckily for me there was a very large dataset that dates back all the way to 1951 of every single injury that ever occurred. I am going to focus on the years 2013-2022 since these are the only years I have access to in my dataset. 
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/cf8d91fd-0021-42d9-831e-8cea45013c5d)
+
+Relinquished and acquired are the ways in which the player got placed onto the injury list according to this dataset. I am only going to care about the Season attribute because with this I am able to group by and see how many players got injured since 2013.
+To make this dataset fair, I would need to get rid of an outlier because obviously due to covid in the year 2021 I am going to see a lot more people placed on the injury list. Players with covid does not matter to my hypothesis because I believe the increase in fast pacing of the game would affect injuries. 
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/f425abad-dd8b-4a3c-abf9-dd6d03196891)
+
+500 results were removed to make it fair and now I can begin creating some visualization:
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/16d790b1-25c9-48f7-9f5f-daa2fd06312b)
+
+Not a very pretty plot. Lets see what a linear regression test would say.
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/442b25c0-4969-4cb7-a9a4-9f95ac5bdc12)
+- As  we can see, the pvalue is way too high meaning there is no significant evidence to suggest that the amount of injuries increases with the amount of possessions. 
+<br><br><br>
+
+## Analysis 5: Finding Statistically Closest Neighbors
+
+I want to create a KNN algorithm which will take the average of the 21-22 season of all the players. This will be used as the training model. Then you can choose, or take a random player from the 2021-2022 season and see the 5 players who share the chosen player's stats. I am hoping from doing this you can see some common factors with players with the chosen player that goes beyond basketball. Say for example I choose ‘Kyrie Irving’ who is a player that is very reliant on his ability to dribble a basketball as my input player and the machine spits out Stephen Curry, a player who is also very reliant on dribbling a basketball.
+
+For this calculation I tried normalizing the data, but when I imputed different players the same 5 players kept being outputted so I stuck with the normal calculation which came out surprisingly accurate. I also dropped games played because this stat just tells you how many games a certain player played which more correlates with how injury prone a player is not his playing basketball ability and so because of this I don't want this stat affecting valuable data.
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/aed80b93-7338-46fc-a78a-251a2d69cd5f)
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/cadce7d5-6cdf-4bc1-907c-b410fe740a2e)
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/bbe5fc9a-5b1e-435d-8432-b1ff8dff950c)
+
+So when Jayson Tatum gets imputed into the model, Devin Booker, Jaylen Brown, Stephen Curry, Kevin Durant and Paul George get outputted. If you know basketball you know that this is a somewhat accurate description since these guys are all elite scorers which is who Jayson Tatum is. To really test this I wanted to see if it would work on centers as well, and not superstars so I used Domantas Sabonis who is a center, and Chris paul who is a point guard as subjects.
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/2381b32a-d45a-400f-934c-151d776c41cc)
+- These are all role playing centers just like Domantas Sabonis. None of these have insane superstar stats so this is a fairly accurate description.
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/d12e90f5-68b3-4862-9ba9-ae73fc2ead3b)
+- It outputted a bunch of playmaking point guards which is a good description of who Chris Paul is.
+<br><br><br>
+
+## Analysis 6: Seeing average players with Clustering
+
+I want to use K-Means Clustering on the 3 positions of the NBA (Guards, Forwards, and Centers). With this clustering I will be able to see the 2 types of players there are. Those who have a positive box plus minus (PLUS_MINUS) means they had a positive contribution to the scoreboard, and those who had a negative box plus minus means they have a negative contribution to them being on the court. To do this I am simply going to use the groupby function on the 3 positions which are Guards, Forwards, and Centers. 
+
+To start, I ran a test to see what my K value should approximately be.
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/fb6c9cab-edda-424b-a135-5cc6f5086508)
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/70808ea7-19df-4f8e-9e4f-1ea7d1013a12)
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/ccb1dda0-1f94-4245-81e0-5b2bf36f6d2d)
+
+It came out roughly the same with K value being around 3. So I used this value for my guards dataframe:
+
+
+<br>
+<h3>Guards</h3>
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/3796ea94-a59d-4864-af2b-8e7ebbae7e3c)
+
+From PLUS_MINUS stat, it appears we got back 3 types of guard players. Those who have a  negative, positive and neutral impact on the court. 
+
+- Surprisingly, Guards who had the highest points per game had a neutral impact on the court. I am assuming these are the players who have star power, but have no one else good on their team so they have more shots to take, but it does not mean they helped out. 
+- I could not see a reason as to why the players with a positive PLUS_MINUS had their individual stats. Reason why is because anything guards did from cluster 1, cluster 2 did but better.
+- One of the biggest reasons I see as to why guards from cluster 2 had bad impact is because they had the worst field goal percentage (FG_PCT) and 3 point percentage (FG3_PCT), as well as they had the fewest assists numbers which something guards are supposed to do is to facilitate the floor and pass the ball around so it makes sense that a failing guard would lack this stat.
+
+The analysis found that guards with the highest points per game had a neutral impact on the court, suggesting their scoring may not significantly contribute to team success. Guards in cluster 2 had a negative impact, likely due to their poor field goal and three point percentages as well as few assists.
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/ddd84f17-33fc-420c-a790-582959f714c5)
+
+<br>
+<h3>Forwards</h3>
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/2a4fa9fe-75c7-47e8-9505-da2b616d917d)
+
+Looks like we have the same types of players as the last position: positive, neutral and negative.
+
+- Once again we see a relationship between players who get a lot of points and have it neutrally impacted when they are on the floor. Almost as if these players have empty stats which means they look good on paper, but on the court it doesn't really amount to winning.
+- We can see the negative cluster has a field goal percentage as the lowest of the 3, whereas the neutral and positive clusters have around the same field goal percentage at around 50% each. Same stat applies to 3 point percentage.
+  
+Forwards who score a lot of points may not contribute significantly to winning, indicating “empty stats.” The negative cluster had the lowest field goal percentage, while the neutral and positive clusters had similar percentages around 50%. Shooting efficiency plays a crucial role on a player’s impact on the court.
+
+<br>
+<h3>Centers</h3>
+
+![](https://github.com/eitancohen77/NBA-Dataset-Analysis/assets/98838116/db0ef174-6324-4567-b40e-7cc0eb5ef713)
+
+Here is interesting because what is supposed to be a neutral PLUS_MINUS as the trend we have been seeing, the centers get a somewhat positive plus minus. This may tell us that when centers perform well and score a lot of points it may lead to a positive relationship on the court.
+- As we can see from cluster 1, centers who don't rebound (REB) the ball well will have a negative effect on the court. This makes sense because a center’s primary job is to rebound the ball so there can either be a second chance to score or defend the rim and get back on offense. 
+- Blocks (BLK) is also a stat in which the negative cluster lacks. 
+- As the previous cluster groups showed it seems there is a trend with field goal percentage in that the worst a player shoots the ball, the worst plus minus that player would have
+
+This analysis of clustering revealed that centers who struggle with rebounding and have a low field goal percentage tend to have a negative impact on the court. Effective rebounding and efficient scoring are crucial for centers to contribute positively to their team’s success.
+
+Overall these clusters had a very similar message. Shooting the ball well does not automatically correlate with success on the basketball, but shooting the ball poorly will give you bad numbers when it comes to the plus minus stat.
+
+
+# Conclusion
+Throughout this project, I gained valuable insights and drew meaningful conclusions from analyzing an NBA dataset. The data exploration and statistical analyses provided a deeper understanding of player performance, changes over time and the impact of various factors on team success. From the analysis of statistical correlations between player stats, I observed interesting relationships between different variables, indicating that players who perform better in one area may not do so in the other. The examination of minutes played distribution revealed insights into the allocation of playing time, particularly in the playoffs. Analyzing the changes in the game over the past decade uncovered significant trends such as the steady increase in the three point shot which indicated a more perimeter-oriented style of play. While exploiting the relationship between possessions and injuries, the analysis did not find significant evidence to support direct correlation which suggests that an increase in possessions and pace may not inherently lead to a higher risk of injuries among NBA players. By using machine learning techniques, I used the K-Nearest Neighbors algorithm to identify similar players and group them based on their stats as well using K-Means Clustering to group certain players up to see which one had a great impact on the court. 
+Overall this project deepened my knowledge of the NBA game and its  intricacies. The data-driven analysis offered valuable insights into player performance, the evolving nature of the game and the factors that contribute to team success. 
 
